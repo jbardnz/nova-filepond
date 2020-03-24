@@ -113,7 +113,8 @@ class FilepondController extends BaseController
 
         $response = response(Storage::disk($disk)->get($serverId))
             ->header('Content-Disposition', "inline; name=\"$filename\"; filename=\"$basename\"")
-            ->header('Content-Length', Storage::disk($disk)->size($serverId));
+            ->header('Content-Length', Storage::disk($disk)->size($serverId))
+            ->header('X-Vapor-Base64-Encode', 'True');
 
         if ($mimeType = Filepond::guessMimeType($extension)) {
 
